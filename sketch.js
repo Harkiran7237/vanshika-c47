@@ -21,17 +21,17 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(windowWidth,windowHeight);
-  bg = createSprite(800,300,400,600);
+  createCanvas(800,600);
+  bg = createSprite(800,300,200,600);
   bg.addImage("back", bgimg);
-  bg.scale = 8;
-  rocket = createSprite(150, windowHeight/2, 50, 50);
+  bg.scale = 5;
+  rocket = createSprite(150, 200, 50, 50);
   rocket.addImage("Rocket", rocketimg);
   rocket.scale = 0.5;
   obstaclegroup1 = new Group();
   obstaclegroup2 = new Group();
   obstaclegroup3 = new Group();
-  reset = createSprite(windowWidth/2,windowHeight/2,50,50);
+  reset = createSprite(400,300,50,50);
 reset.addImage("Resett", resetimg);
 reset.visible = false;
 reset.scale = 0.4;
@@ -50,22 +50,22 @@ function draw() {
       score = score + 1;
     }
    
-    if(keyDown("UP_ARROW")){
+    if('onTouchmove' || keyDown("UP_ARROW")){
       rocket.y = rocket.y - 5;
     }
-    if (keyDown("DOWN_ARROW")){
+    if ('onTouchMove' || keyDown("DOWN_ARROW")){
       rocket.y = rocket.y + 5;
     }
     bg.velocityX = -5;
     if (bg.x<0){
-      bg.x = bg.width/0.5;
+      bg.x = bg.width/2;
     }
     obstacle1();
     obstacle2();
     obstacle3();
     if (rocket.isTouching(obstaclegroup1)|| rocket.isTouching(obstaclegroup2)|| rocket.isTouching(obstaclegroup3)){
       gameState = end;
-   //   sound.play();
+      sound.play();
     }
   } 
   else if(gameState === end){
@@ -101,12 +101,12 @@ function obstacle1(){
  // var a = random(100,150);
   if(frameCount % 150===0){
     console.log("hello");
-  planet1 = createSprite(windowWidth,400,50,50);
+  planet1 = createSprite(800,400,50,50);
   planet1.addImage("plan1", planet1img);
   planet1.scale = 0.5;
   planet1.velocityX = -4;
-  planet1.y = random(10,windowHeight);
-  //planet1.lifetime = 220;
+  planet1.y = random(10,580);
+  planet1.lifetime = 220;
   //planet1.debug = true;
   planet1.setCollider("circle",0,0,90);
   obstaclegroup1.add(planet1);
@@ -117,12 +117,12 @@ function obstacle1(){
 
 function obstacle2(){
   if(frameCount % 200===0){
-  planet2 = createSprite(windowWidth,400,50,50);
+  planet2 = createSprite(800,400,50,50);
   planet2.addImage("plan2", planet2img);
   planet2.scale = 0.1;
   planet2.velocityX = -6;
-  planet2.y = random(10,windowHeight);
- // planet2.lifetime = 135;
+  planet2.y = random(10,580);
+  planet2.lifetime = 135;
  // planet2.debug = true;
   planet2.setCollider("circle",0,0,310);
   obstaclegroup2.add(planet2);
@@ -133,12 +133,12 @@ function obstacle2(){
 
 function obstacle3(){
   if(frameCount % 250===0){
-  planet3 = createSprite(windowWidth,400,50,50);
+  planet3 = createSprite(800,400,50,50);
   planet3.addImage("plan3", planet3img);
   planet3.scale = 0.1;
   planet3.velocityX = -8;
-  planet3.y = random(10,windowHeight);
-//  planet3.lifetime = 100;
+  planet3.y = random(10,580);
+  planet3.lifetime = 100;
   //planet3.debug = true;
   planet3.setCollider("circle",0,0,340);
   obstaclegroup3.add(planet3);
